@@ -6,22 +6,17 @@ public class Manager : MonoBehaviour
 {//This is a singleton pattern
 //will create an instance of the manager throughout the whole game 
 // there can only be one instance
-    private static Manager _instance;
-    public static Manager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<Manager>();
-            }
-
-            return _instance;
-        }
-    }
+    public static Manager instance{get; private set;}
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }else
+        {
+            Destroy(gameObject);
+        }
     }
 }
