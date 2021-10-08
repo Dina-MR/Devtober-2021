@@ -7,7 +7,7 @@ public class Audio : MonoBehaviour
 {
     // Start is called before the first frame update
     public static Audio instance{get; private set;}
-    private static AudioSource sound;
+    public static AudioSource sound;
     void Start()
     {
         sound = GetComponent<AudioSource>();
