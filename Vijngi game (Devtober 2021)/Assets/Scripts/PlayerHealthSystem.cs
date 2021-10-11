@@ -3,49 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealthSystem : MonoBehaviour
 {
-    public float maxHealth = 3;
-    public float currentHealth;
     public int numberOfHearts;
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite halfHeart;
-    public Sprite emptyHeart;
+    private List<Heart> heartList;
 
-    void Start()
+    /*void Start()
     {
         currentHealth = maxHealth;
     }
 
     void Update()
     {
-        for(int i = 0; i < hearts.Length; i++)
-        {
-            if(i < currentHealth){
-                hearts[i].sprite = fullHeart;
-            }
+        
+    }*/
 
-            switch(i < numberOfHearts)
-            {
-                case true:
-                    hearts[i].enabled = true;
-                    break;
-                default:
-                    hearts[i].enabled = false;
-                    break;
-            }
+    public PlayerHealthSystem(int numberOfHearts)
+    {
+        heartList = new List<Heart>();
+        for (int i = 0; i < numberOfHearts; i++)
+        {
+            heartList.Add(new Heart(4));
         }
     }
 
-    public void TakeDamage(float damage)
+    public List<Heart> GetHeartList()
+    {
+        return this.heartList;
+    }
+
+
+    /*public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        // When the player's new health value ends with .5
-        //if(currentHealth * 10 % 10 != 10)
-        //{
-            //for(int i = 0; i < currentHealth + damage - .5; i++)
-        //}
+    }*/
+
+    // Represents a heart
+    public class Heart
+    {
+        // Represents the amount of HP inside a heart (0: empty, 1: half-full, 2: full)
+        private int fragments;
+
+        public Heart(int fragments)
+        {
+            this.fragments = fragments;
+        }
+
+        public int GetFragmentAmount()
+        {
+            return fragments;
+        }
+
+        public void SetFragments(int fragments)
+        {
+            this.fragments = fragments;
+        }
     }
 }
