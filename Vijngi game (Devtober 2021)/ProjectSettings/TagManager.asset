@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Road
+    uniqueID: 3801450309
+    locked: 0
+  - name: BackgroundGrass
+    uniqueID: 2445978879
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 'Player '
+    uniqueID: 1362017611
     locked: 0
