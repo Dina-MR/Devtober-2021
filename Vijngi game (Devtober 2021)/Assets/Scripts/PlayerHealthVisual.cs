@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,7 @@ public class PlayerHealthVisual : MonoBehaviour
     public void SetHeartImageList(PlayerHealthSystem playerHealthSystem)
     {
         List<PlayerHealthSystem.Heart> heartList = playerHealthSystem.GetHeartList();
+
         Vector2 heartAnchoredPosition = new Vector2(0,0); //position of the heart
         for(int i = 0; i < heartList.Count; i++)
         {
@@ -41,6 +43,15 @@ public class PlayerHealthVisual : MonoBehaviour
             CreateHeartImage(heartAnchoredPosition).SetHeartFragments(heart.GetFragmentAmount());
             heartAnchoredPosition += new Vector2(60, 0);
         }
+
+        playerHealthSystem.OnDamaged += PlayerHealthSystem_OnDamaged;
+    }
+
+    private void PlayerHealthSystem_OnDamaged(object sender, System.EventArgs e)
+    {
+        // Player healths damage was damage
+        List<PlayerHealthSystem.Heart> heartList = playerHealthSystem.GetHeartList();
+        
     }
 
     // Create a single heart image
