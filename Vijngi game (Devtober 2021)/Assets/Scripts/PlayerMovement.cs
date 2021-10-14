@@ -9,11 +9,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity = Vector2.zero;
     float horizontalMovement;
     float verticalMovement;
+    float movementLimiter = 0.7f;
 
     void FixedUpdate()
     {
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        if (horizontalMovement != 0 && verticalMovement != 0) // Check for diagonal movement
+        {
+            horizontalMovement *= movementLimiter;
+            verticalMovement *= movementLimiter;
+        }
         MovePlayer();
     }
 

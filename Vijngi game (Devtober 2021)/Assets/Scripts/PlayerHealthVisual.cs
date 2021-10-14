@@ -25,6 +25,17 @@ public class PlayerHealthVisual : MonoBehaviour
         SetPlayerHealthSystem(playerHealthSystem);
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            playerHealthSystem.Damage(1);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            playerHealthSystem.Heal(1);
+        }
+    }
+
     public void SetPlayerHealthSystem(PlayerHealthSystem playerHealthSystem)
     {
         this.playerHealthSystem = playerHealthSystem;
@@ -41,17 +52,41 @@ public class PlayerHealthVisual : MonoBehaviour
         {
             PlayerHealthSystem.Heart heart = heartList[i];
             CreateHeartImage(heartAnchoredPosition).SetHeartFragments(heart.GetFragmentAmount());
-            heartAnchoredPosition += new Vector2(60, 0);
+            heartAnchoredPosition += new Vector2(40, 0);
         }
 
         playerHealthSystem.OnDamaged += PlayerHealthSystem_OnDamaged;
+        playerHealthSystem.OnHealed += PlayerHealthSystem_OnHealed;
+        playerHealthSystem.OnDead += PlayerHealthSystem_OnDead;
     }
 
     private void PlayerHealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
         // Player healths damage was damage
+        RefreshAllHearts();
+    }
+
+    private void PlayerHealthSystem_OnHealed(object sender, System.EventArgs e)
+    {
+        // Player healths was healed
+        RefreshAllHearts();
+    }
+
+    private void PlayerHealthSystem_OnDead(object sender, System.EventArgs e)
+    {
+        // Player healths was healed
+        Debug.Log("Joueur mort");
+    }
+
+    private void RefreshAllHearts()
+    {
         List<PlayerHealthSystem.Heart> heartList = playerHealthSystem.GetHeartList();
-        
+        for(int i = 0; i < heartImageList.Count; i++)
+        {
+            HeartImage heartImage = heartImageList[i];
+            PlayerHealthSystem.Heart heart = heartList[i];
+            heartImage.SetHeartFragments(heart.GetFragmentAmount());
+        }
     }
 
     // Create a single heart image
