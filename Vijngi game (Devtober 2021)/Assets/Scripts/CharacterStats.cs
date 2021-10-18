@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] public Stat criticalChance;
     [SerializeField] public Stat criticalAttack;
 
-    public CharacterStats()
+    public void CharacterStatsFunction()
     {
         //
     }
@@ -27,7 +27,7 @@ public class CharacterStats : MonoBehaviour
         public float maximalValue;
         public float increaseValue; // Increases the value of the stat after leveling up
 
-        public Start(float _baseValue, float _currentValue, float _minimalValue, float _maximalValue, float _increaseValue)
+        public void Start(float _baseValue, float _currentValue, float _minimalValue, float _maximalValue, float _increaseValue)
         {
             this.baseValue = _baseValue;
             this.currentValue = _currentValue;
