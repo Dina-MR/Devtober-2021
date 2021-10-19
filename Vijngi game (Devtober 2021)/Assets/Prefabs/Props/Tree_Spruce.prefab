@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingIndex: 5000
   offset: 0
+  runOnce: 1
 --- !u!50 &7380706216844837088
 Rigidbody2D:
   serializedVersion: 4
