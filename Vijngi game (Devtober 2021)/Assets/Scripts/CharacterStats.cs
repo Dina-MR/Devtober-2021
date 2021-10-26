@@ -15,8 +15,13 @@ public class CharacterStats : MonoBehaviour
     //[SerializeField] public Stat criticalAttack;
 
     public List<Stat> stats = new List<Stat>();
-
-    void Start(float attackValue, float defenseValue, float hpValue, float tpValue, float criticalChanceValue, float criticalAttackValue)
+    float attackValue;
+    float defenseValue;
+    float hpValue;
+    float tpValue;
+    float criticalChanceValue;
+    float criticalAttackValue;
+    void Start()
     {
         stats.Add(new Stat(attackValue, "Attack", "ATK"));
         stats.Add(new Stat(defenseValue, "Defense", "DEF"));
