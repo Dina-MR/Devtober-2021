@@ -17,11 +17,41 @@ public class PlayerHealthSystem : MonoBehaviour
 
     private List<Heart> heartList;
 
-    /*void Start()
+    void Start()
     {
+        //Gets the hp stat from the Player's character stats component
+        maxHealth = (int)GetComponent<CharacterStats>().hpValue;
         currentHealth = maxHealth;
-    }*/
+        //Sets the number of hearts based on the max health
+        switch(maxHealth % MAX_FRAGMENT_AMOUNT == 0)
+        {
+            case true:
+                numberOfHearts = maxHealth / MAX_FRAGMENT_AMOUNT;
+                break;
+            default:
+                numberOfHearts = (maxHealth + 1) / MAX_FRAGMENT_AMOUNT;
+                break;
+        }
+        //Initialize the hearts list
+        heartList = new List<Heart>();
+        //Initialize each heart's fragments number, except the last
+        for (int i = 0; i < numberOfHearts - 1; i++)
+        {
+            heartList.Add(new Heart(MAX_FRAGMENT_AMOUNT));
+        }
+        //Initialize the last heart's fragments number
+        switch(maxHealth % MAX_FRAGMENT_AMOUNT == 0)
+        {
+            case true:
+                heartList.Add(new Heart(MAX_FRAGMENT_AMOUNT));
+                break;
+            default:
+                heartList.Add(new Heart(numberOfHearts * MAX_FRAGMENT_AMOUNT - maxHealth));
+                break;
+        }
+    }
 
+    /*
     public PlayerHealthSystem(int numberOfHearts)
     {
         heartList = new List<Heart>();
@@ -31,7 +61,7 @@ public class PlayerHealthSystem : MonoBehaviour
         }
         SetMaxHealth(numberOfHearts * MAX_FRAGMENT_AMOUNT);
         SetCurrentHealth(maxHealth);
-    }
+    }*/
 
     public void SetMaxHealth(int maxHealth)
     {

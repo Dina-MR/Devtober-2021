@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
+    public Animator animator;
     private Vector2 velocity = Vector2.zero;
+
     float horizontalMovement;
     float verticalMovement;
     float movementLimiter = 0.7f;
@@ -21,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
             verticalMovement *= movementLimiter;
         }
         MovePlayer();
+
+        float characterVelocity = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
+        animator.SetFloat("moveSpeed", characterVelocity);
     }
 
     void MovePlayer()

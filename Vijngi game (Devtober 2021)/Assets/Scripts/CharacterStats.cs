@@ -5,24 +5,17 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    //[SerializeField] public Stat level;
-
-    //[SerializeField] public Stat attack;
-    //[SerializeField] public Stat defense;
-    //[SerializeField] public Stat hp;
-    //[SerializeField] public Stat tp;
-    //[SerializeField] public Stat criticalChance;
-    //[SerializeField] public Stat criticalAttack;
-
     public List<Stat> stats = new List<Stat>();
-    float attackValue;
-    float defenseValue;
-    float hpValue;
-    float tpValue;
-    float criticalChanceValue;
-    float criticalAttackValue;
-    void Start()
+    public float attackValue;
+    public float defenseValue;
+    public float hpValue;
+    public float tpValue;
+    public float criticalChanceValue;
+    public float criticalAttackValue;
+
+    public void Start()
     {
+        //Adds all stats to the list
         stats.Add(new Stat(attackValue, "Attack", "ATK"));
         stats.Add(new Stat(defenseValue, "Defense", "DEF"));
         stats.Add(new Stat(hpValue, "HP", "HP"));
@@ -31,16 +24,11 @@ public class CharacterStats : MonoBehaviour
         stats.Add(new Stat(criticalAttackValue, "Critical Attack", "CRIT.ATK"));
     }
 
-    public void CharacterStatsFunction()
-    {
-        //
-    }
-
     // Represents a stat
     public class Stat
     {
-        public float baseValue { get; set; } //Represents the stat value at Level 1;
-        public float currentValue { get; set; } //Represents the current value of the stat
+        public float baseValue { get; set; } //Represents the pure stat value, without any modifiers applied
+        public float currentValue { get; set; } //Represents the current value of the stat, whenever or not a modifier is applied
         public string statName { get; set; }
         public string statAbbreviation { get; set; }
         private List<StatModifier> statModifiers; //Lists the buffs and debuffs on the stat
@@ -48,6 +36,7 @@ public class CharacterStats : MonoBehaviour
         public Stat(float _baseValue, string _statName, string _statAbbreviation)
         {
             this.baseValue = _baseValue;
+            this.currentValue = _baseValue;
             this.statName = _statName;
             this.statAbbreviation = statAbbreviation;
         }

@@ -12,7 +12,8 @@ public class PlayerHealthVisual : MonoBehaviour
     [SerializeField] private Sprite heartSpriteHalf;
 
     private List<HeartImage> heartImageList;
-    private PlayerHealthSystem playerHealthSystem;
+    [SerializeField] public PlayerHealthSystem playerHealthSystem;
+    private GameObject player;
 
     private void Awake() 
     {
@@ -21,8 +22,7 @@ public class PlayerHealthVisual : MonoBehaviour
 
     private void Start()
     {
-        PlayerHealthSystem playerHealthSystem = new PlayerHealthSystem(3);
-        SetPlayerHealthSystem(playerHealthSystem);
+        SetHeartImageList(playerHealthSystem);
     }
 
     private void Update() {
@@ -36,11 +36,11 @@ public class PlayerHealthVisual : MonoBehaviour
         }
     }
 
-    public void SetPlayerHealthSystem(PlayerHealthSystem playerHealthSystem)
+    /*public void SetPlayerHealthSystem(PlayerHealthSystem playerHealthSystem)
     {
         this.playerHealthSystem = playerHealthSystem;
         SetHeartImageList(playerHealthSystem);
-    }
+    }*/
 
     // Set the hearts image in the list, based on the player's number of hearts
     public void SetHeartImageList(PlayerHealthSystem playerHealthSystem)
